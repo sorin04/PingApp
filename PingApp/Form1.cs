@@ -22,6 +22,33 @@ namespace PingApp2
         private void buttonPing_Click(object sender, EventArgs e)
         {
             infoLabel.Text = "";
+            var baseIp = textAdresse.Text;
+            var numberOfPingsText = textNombrePings.Text;
+
+            if (!TestIp(baseIp))
+            {
+                MessageBox.Show("Adresse Incorrecte.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!int.TryParse(numberOfPingsText, out int numberOfPings) || numberOfPings <= 0)
+            {
+                MessageBox.Show("Le nombre d'adresses à pinger est invalide.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            var tasks = new List<Task>();
+            for (int i = 0; i < numberOfPings; i++)
+            {
+                string ipToPing = IncrementIp(baseIp, i);
+                tasks.Add(Task.Run(() => PingIP(ipToPing)));
+                Task.WhenAll(tasks).ContinueWith(t =>
+                {
+
+                    Invoke(new Action(() =>
+                    {
+                        infoLabel.Text = "Pings terminés.";
+                    }));
+                });
+            }
 
             var toTest = textAdresse.Text;
             if (!TestIp(toTest))
@@ -69,5 +96,7 @@ namespace PingApp2
                 listView1.Items.Add(item);
             }
         }
+
+        
     }
 }

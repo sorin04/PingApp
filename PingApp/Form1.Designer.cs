@@ -34,6 +34,8 @@
             statusStrip1 = new StatusStrip();
             infoLabel = new ToolStripStatusLabel();
             listView1 = new ListView();
+            label2 = new Label();
+            textBox1 = new TextBox();
             statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -90,12 +92,30 @@
             listView1.TabIndex = 4;
             listView1.UseCompatibleStateImageBehavior = false;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(15, 168);
+            label2.Name = "label2";
+            label2.Size = new Size(59, 25);
+            label2.TabIndex = 5;
+            label2.Text = "label2";            
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(131, 162);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(204, 31);
+            textBox1.TabIndex = 6;
+            // 
             // Form1
             // 
             AcceptButton = buttonPing;
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1242, 561);
+            Controls.Add(textBox1);
+            Controls.Add(label2);
             Controls.Add(listView1);
             Controls.Add(statusStrip1);
             Controls.Add(label1);
@@ -122,5 +142,7 @@
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel infoLabel;
         private ListView listView1;
+        private Label label2;
+        private TextBox textBox1;
     }
 }
