@@ -1,5 +1,10 @@
+using PingApp;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.NetworkInformation;
-using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PingApp2
 {
@@ -22,81 +27,73 @@ namespace PingApp2
         private void buttonPing_Click(object sender, EventArgs e)
         {
             infoLabel.Text = "";
-            var baseIp = textAdresse.Text;
-            var numberOfPingsText = textNombrePings.Text;
+            string baseIpText = textAdresse.Text;
+            string numberOfPingsText = textNombrePings.Text;
 
-            if (!TestIp(baseIp))
+            IPV4 baseIp;
+            try
             {
-                MessageBox.Show("Adresse Incorrecte.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                baseIp = new PingApp.Calculipv4(baseIpText);
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show($"Adresse incorrecte : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             if (!int.TryParse(numberOfPingsText, out int numberOfPings) || numberOfPings <= 0)
             {
                 MessageBox.Show("Le nombre d'adresses à pinger est invalide.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+            listView1.Items.Clear();
             var tasks = new List<Task>();
             for (int i = 0; i < numberOfPings; i++)
             {
-                string ipToPing = IncrementIp(baseIp, i);
-                tasks.Add(Task.Run(() => PingIP(ipToPing)));
-                Task.WhenAll(tasks).ContinueWith(t =>
+                try
                 {
-
-                    Invoke(new Action(() =>
-                    {
-                        infoLabel.Text = "Pings terminés.";
-                    }));
-                });
+                    IPV4 ipToPing = baseIp.Increment(i);
+                    tasks.Add(Task.Run(() => PingIP(ipToPing.Address)));
+                }
+                catch (ArgumentOutOfRangeException ex)
+                {
+                    MessageBox.Show($"Erreur : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
 
-            var toTest = textAdresse.Text;
-            if (!TestIp(toTest))
+            Task.WhenAll(tasks).ContinueWith(t =>
             {
-                MessageBox.Show("Adresse Incorrecte.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            PingIP(toTest);
+                Invoke(new Action(() =>
+                {
+                    infoLabel.Text = "Pings terminés.";
+                }));
+            });
         }
 
-        private bool TestIp(string toTest)
-        {
-            string pattern = @"^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
-            bool isValid = Regex.IsMatch(toTest, pattern);
-            return isValid;
-        }
-
-        private void PingIP(String toTest)
+        private void PingIP(string ipAddress)
         {
             Ping pingSender = new Ping();
 
             try
             {
-                PingReply reply = pingSender.Send(toTest);
+                PingReply reply = pingSender.Send(ipAddress);
                 string status = reply.Status == IPStatus.Success ? "Succès" : $"Échec : {reply.Status}";
                 string roundtripTime = reply.Status == IPStatus.Success ? reply.RoundtripTime.ToString() : "N/A";
 
-                ListViewItem item = new ListViewItem(toTest);
+                ListViewItem item = new ListViewItem(ipAddress);
                 item.SubItems.Add(roundtripTime);
                 item.SubItems.Add(status);
-                listView1.Items.Add(item);
-
-                infoLabel.Text = reply.Status == IPStatus.Success
-                        ? $"Temps de réponse : {reply.RoundtripTime} ms"
-                        : $"Ping échoué : {reply.Status}";
+                Invoke(new Action(() => listView1.Items.Add(item)));
             }
             catch (Exception ex)
             {
-                infoLabel.Text = $"Erreur : {ex.Message}";
-
-                ListViewItem item = new ListViewItem(toTest);
+                ListViewItem item = new ListViewItem(ipAddress);
                 item.SubItems.Add("N/A");
                 item.SubItems.Add($"Erreur : {ex.Message}");
-                listView1.Items.Add(item);
+                Invoke(new Action(() => listView1.Items.Add(item)));
             }
         }
-
-        
     }
 }

@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35506.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PingApp", "PingApp\PingApp.csproj", "{EF8FC7D4-C969-4D6F-9CDF-D6CDB51556FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PingApp", "PingApp\PingApp.csproj", "{EF8FC7D4-C969-4D6F-9CDF-D6CDB51556FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PingApp2", "PingApp2\PingApp2.csproj", "{720E9F6B-8D14-4C4D-80FF-9ACAE5A83A4A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PingConsole", "PingConsole\PingConsole.csproj", "{A9D3585D-3A63-4848-8FAC-6D16AF9EE2F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PingConsole", "PingConsole\PingConsole.csproj", "{A9D3585D-3A63-4848-8FAC-6D16AF9EE2F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		{EF8FC7D4-C969-4D6F-9CDF-D6CDB51556FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF8FC7D4-C969-4D6F-9CDF-D6CDB51556FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF8FC7D4-C969-4D6F-9CDF-D6CDB51556FA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{720E9F6B-8D14-4C4D-80FF-9ACAE5A83A4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{720E9F6B-8D14-4C4D-80FF-9ACAE5A83A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{720E9F6B-8D14-4C4D-80FF-9ACAE5A83A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{720E9F6B-8D14-4C4D-80FF-9ACAE5A83A4A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A9D3585D-3A63-4848-8FAC-6D16AF9EE2F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A9D3585D-3A63-4848-8FAC-6D16AF9EE2F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9D3585D-3A63-4848-8FAC-6D16AF9EE2F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -30,5 +24,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {043ED0EB-BB21-45E0-9B4E-B9EDEA20E9DF}
 	EndGlobalSection
 EndGlobal
