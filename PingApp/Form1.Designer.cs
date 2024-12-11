@@ -71,10 +71,10 @@
             // 
             statusStrip1.ImageScalingSize = new Size(20, 20);
             statusStrip1.Items.AddRange(new ToolStripItem[] { infoLabel });
-            statusStrip1.Location = new Point(0, 315);
+            statusStrip1.Location = new Point(0, 435);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Padding = new Padding(1, 0, 13, 0);
-            statusStrip1.Size = new Size(869, 22);
+            statusStrip1.Size = new Size(1094, 22);
             statusStrip1.TabIndex = 3;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -86,9 +86,9 @@
             // listView1
             // 
             listView1.Location = new Point(475, 51);
-            listView1.Margin = new Padding(2, 2, 2, 2);
+            listView1.Margin = new Padding(2);
             listView1.Name = "listView1";
-            listView1.Size = new Size(353, 242);
+            listView1.Size = new Size(521, 307);
             listView1.TabIndex = 4;
             listView1.UseCompatibleStateImageBehavior = false;
             // 
@@ -105,7 +105,7 @@
             // textNombrePings
             // 
             textNombrePings.Location = new Point(92, 97);
-            textNombrePings.Margin = new Padding(2, 2, 2, 2);
+            textNombrePings.Margin = new Padding(2);
             textNombrePings.Name = "textNombrePings";
             textNombrePings.Size = new Size(144, 23);
             textNombrePings.TabIndex = 6;
@@ -115,7 +115,7 @@
             AcceptButton = buttonPing;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(869, 337);
+            ClientSize = new Size(1094, 457);
             Controls.Add(textNombrePings);
             Controls.Add(label2);
             Controls.Add(listView1);

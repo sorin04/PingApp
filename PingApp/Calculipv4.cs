@@ -9,12 +9,12 @@ namespace PingApp
 
         public Calculipv4(string address)
         {
-            if (!IsValidIP(address))
+            if (!ValidIP(address))
                 throw new ArgumentException("L'adresse IP n'est pas valide.");
             Address = address;
         }
 
-        private bool IsValidIP(string address)
+        private bool ValidIP(string address)
         {
             return IPAddress.TryParse(address, out _);
         }
